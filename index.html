@@ -177,11 +177,11 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '637678730170626');
+fbq('init', '1737137059954731');
 fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=637678730170626&ev=PageView&noscript=1"
+src="https://www.facebook.com/tr?id=1737137059954731&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
 <!-- Google Tag Manager -->
@@ -397,7 +397,7 @@ $('chips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)
 function openModal(id){const c=byId[id],d=DET[id]||{desc:'',mods:[]};
  const mods=d.mods.map(m=>`<div class="mod"><h5>${m[0]}</h5><ul>${m[1].map(a=>`<li><span class="li-ic ${a[1]}">${a[1]=='v'?icV:icP}</span>${a[0]}</li>`).join('')}</ul></div>`).join('');
  $('modalContent').innerHTML=`<div class="modal-head"><div class="mc"><img src="${COVERS[id]}" alt="${c.t}"></div><div><div class="cat">${nomeNicho[c.nicho]}</div><h3>${c.t}</h3><div class="mpr"><span class="from">R$ ${c.de}</span><span class="now"><span>R$ </span>${c.p}</span></div><p class="mdesc">${d.desc}</p></div></div><div class="modal-body"><div class="t">Conteúdo do curso</div>${mods}</div><div class="modal-foot"><div class="inc"><span>${icV} Vídeo-aulas</span><span>${icP} Apostilas</span><span>&#9733; Certificado</span><span>&#9733; Grupo VIP</span><span>&#9733; Garantia 7 dias</span></div><a class="btn btn-gold" data-buy="${id}">Comprar Agora por R$ ${c.p}</a></div>`;
- $('modalBg').classList.add('open');document.body.style.overflow='hidden';if(window.fbq)fbq('track','ViewContent',{content_name:c.t,content_ids:[id]});}
+ $('modalBg').classList.add('open');document.body.style.overflow='hidden';if(window.fbq)fbq('track','ViewContent',{content_name:c.t,content_ids:[id],content_type:'product',value:c.pn,currency:'BRL'});}
 function closeModal(){$('modalBg').classList.remove('open');document.body.style.overflow='';}
 $('modalX').onclick=closeModal;$('modalBg').addEventListener('click',e=>{if(e.target.id=='modalBg')closeModal();});
 
@@ -439,7 +439,7 @@ $('storiesBg').addEventListener('click',e=>{if(e.target.id=='storiesBg')closeSto
 document.addEventListener('click',e=>{
  const go=e.target.closest('[data-go]');if(go){e.preventDefault();document.querySelector(go.dataset.go).scrollIntoView({behavior:'smooth'});return;}
  const md=e.target.closest('[data-modal]');if(md){openModal(md.dataset.modal);return;}
- const b=e.target.closest('[data-buy]');if(b){e.preventDefault();if(window.fbq)fbq('track','InitiateCheckout',{content_name:b.dataset.buy});const u=KIWIFY[b.dataset.buy];if(u&&!u.includes('SEU-LINK'))window.open(u,'_blank');else alert('Falta o link da Kiwify para: '+b.dataset.buy+'\n(edite o objeto KIWIFY no topo do script)');return;}
+ const b=e.target.closest('[data-buy]');if(b){e.preventDefault();if(window.fbq){const _id=b.dataset.buy;const _c=byId[_id];const _n=!_c&&NICHOS.find(x=>'combo-'+x.id===_id);fbq('track','InitiateCheckout',{content_name:_id,content_ids:[_id],content_type:'product',value:_c?_c.pn:(_n?_n.combo:0),currency:'BRL'});}const u=KIWIFY[b.dataset.buy];if(u&&!u.includes('SEU-LINK'))window.open(u,'_blank');else alert('Falta o link da Kiwify para: '+b.dataset.buy+'\n(edite o objeto KIWIFY no topo do script)');return;}
  const pt=e.target.closest('[data-portal]');if(pt){e.preventDefault();window.open(KIWIFY.portal,'_blank');return;}
  const vp=e.target.closest('[data-vip]');if(vp){e.preventDefault();window.open(KIWIFY.vip,'_blank');return;}
  const sp=e.target.closest('[data-suporte]');if(sp){e.preventDefault();window.open(KIWIFY.suporte,'_blank');return;}
